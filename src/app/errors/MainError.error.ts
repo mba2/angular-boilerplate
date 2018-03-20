@@ -10,7 +10,7 @@ export class MainError extends ErrorHandler {
 
   handleError() {
     console.log("MainError Class!!!!!");
-    this.service.throwUnexpectedError();
+    // this.service.throwUnexpectedError();
     return;
   }
 } 

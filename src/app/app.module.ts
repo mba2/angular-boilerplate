@@ -1,24 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-// ERRORS
-import { MainError } from './errors/MainError.error';
-// COMPONENTS
+/** REDUX */
+import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { combineReducers } from 'redux';
+import { IAppState, rootReducer, INITIAL_STATE } from './store';
+
+/** ERRORS */
+
+/** COMPONENTS */
 import { AppComponent } from './app.component';
-import { ToastComponent } from './components/toast/toast.component';
+import { PlaceholderComponent } from './components/placeholder/placeholder.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToastComponent
+    PlaceholderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgReduxModule
   ],
   providers: [
-    { provide : ErrorHandler , "useClass": MainError}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>) {
+    ngRedux.configureStore(rootReducer, INITIAL_STATE);
+    console.log(ngRedux.getState());
+  }
+ }
