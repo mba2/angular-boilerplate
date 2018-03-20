@@ -1,18 +1,25 @@
-/** ANY OTHER STORE GOES HERE */
-import { IPlaceholderState, PLACEHOLDER_INIT_STATE, placeholderReducer } from './components/placeholder/store';
-
+/** REDUX, RXJS FEATURES */
 import { tassign } from 'tassign'; 
-import { combineReducers } from 'redux';
+import { CHECKIN_SELECTED } from './actions';
 
 
 export interface IAppState {
-  placeholder: IPlaceholderState
+  checkin_date: number;
+  checkout_date: number;
 }
 
 export const INITIAL_STATE = {
-  placeholder: PLACEHOLDER_INIT_STATE
+  checkin_date: null,
+  checkout_date: null
 }
 
-export const rootReducer = combineReducers<IAppState>({
-  placeholder: placeholderReducer
-});
+
+export function rootReducer(state: IAppState, action): IAppState {
+  switch (action.type) {
+    case CHECKIN_SELECTED:
+      return  tassign(state, { checkin_date : action.payload});
+    default:
+      break;
+  }
+  return state;
+}

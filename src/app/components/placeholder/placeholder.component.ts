@@ -1,6 +1,12 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
+
+/** REDUX */
 import { select, NgRedux } from 'ng2-redux';
-import { IAppState } from '../../../../after/redux-demo/src/app/store';
+import { IAppState } from '../../store';
+/** ACTIONS */
+import { INCREMENT } from './actions';
+
+
 
 @Component({
   selector: 'placeholder',
@@ -8,13 +14,27 @@ import { IAppState } from '../../../../after/redux-demo/src/app/store';
   styleUrls: ['./placeholder.component.css'],
 })
 export class PlaceholderComponent implements OnInit{
-   @select(s => s.test.title) title;
+  // @select( (s: IAppState) => s.placeholder.counter) counter;
+  // @select( (s: IAppState) => s.placeholder.title) title;
+  // @select( (s: IAppState) => s.placeholder.items) items;
+  
+
+  @Input('day') day;
+  @Input('month') month;
+  @Input('year') year;
+  isSelected = false;
 
   constructor(private ngRedux: NgRedux<IAppState>) { 
   }
   
-  ngOnInit() {
-    console.log(this.ngRedux.getState());
+  ngOnInit() {}
+
+  // increment(): void {
+  //   this.ngRedux.dispatch( { type: INCREMENT });
+  // }
+
+  toggleDay() {
+    this.isSelected = !this.isSelected;
   }
 
 }

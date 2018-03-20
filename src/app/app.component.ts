@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { NgRedux, select } from 'ng2-redux';
+import { IAppState } from './store';
+import { TestComponent } from './components/test/test.component';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-
-  constructor() {}
+  
+  constructor(ngRedux: NgRedux<IAppState>) {}
 }

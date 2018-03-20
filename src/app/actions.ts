@@ -1,0 +1,1 @@
+export const CHECKIN_SELECTED = 'CHECKIN_SELECTED';  
