@@ -2,7 +2,7 @@
 import { tassign } from 'tassign'; 
 /** ACTIONS */
 import { CHANGE_TITLE, INCREMENT } from './actions';
-import { IcuPlaceholder } from '@angular/compiler/src/i18n/i18n_ast';
+
 
 export interface IPlaceholderState {
   counter: number;
@@ -13,29 +13,49 @@ export interface IPlaceholderState {
 export const PLACEHOLDER_INIT_STATE: IPlaceholderState = {
   counter: 0,
   title: 'Placeholder Title',
-  items: []
+  items: ['Placeholder Item 1', 'Placeholder Item 2']
 }
 
-export function placeholderReducer(state: IPlaceholderState = PLACEHOLDER_INIT_STATE, action ) : IPlaceholderState {
+export function placeholderReducer( 
+  state: IPlaceholderState = PLACEHOLDER_INIT_STATE, 
+  action): IPlaceholderState 
+  {
+    
+  let actions = new PlaceholderActions(state, action);
   switch(action.type) {
     case CHANGE_TITLE:
-      return changeTitle(state,action); 
+      return actions.changeTitle(); 
     case INCREMENT:
-      return increment(state,action);
+      return actions.increment();
     }
-
     return state;
+}
+ 
+
+class PlaceholderActions {
+  constructor( 
+    private state: IPlaceholderState, 
+    private action: any) 
+  {}
+
+  changeTitle() {
+    console.log(this.action);
+    return tassign(
+      this.state,
+      {
+        title : this.action.title
+      }
+    ) 
+  };
+
+  increment() {
+    return tassign(
+      this.state,
+      {
+        counter: this.state.counter + 1
+      });
   }
-  
-  
-function changeTitle(state,action) {
-
-  return state;
 }
+  
 
-function increment(state,action) {
-  return tassign(state,
-    {
-      counter: state.counter + 1
-    });
-}
+

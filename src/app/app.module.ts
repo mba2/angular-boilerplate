@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 
 /** REDUX */
-import { NgRedux, NgReduxModule } from 'ng2-redux';
+import { NgRedux, NgReduxModule, DevToolsExtension } from 'ng2-redux';
 import { combineReducers } from 'redux';
 import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
@@ -11,13 +11,14 @@ import { IAppState, rootReducer, INITIAL_STATE } from './store';
 /** COMPONENTS */
 import { AppComponent } from './app.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
-
+import { AnotherPlaceholderComponent } from './components/another-placeholder/another-placeholder.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlaceholderComponent
+    PlaceholderComponent,
+    AnotherPlaceholderComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +29,9 @@ import { PlaceholderComponent } from './components/placeholder/placeholder.compo
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE);
-    console.log(ngRedux.getState());
+  constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
+    let enhancers = isDevMode() ? [devTools.enhancer()] : [];
+
+    ngRedux.configureStore(rootReducer, INITIAL_STATE, [], enhancers);
   }
  }
