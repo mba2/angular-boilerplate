@@ -8,6 +8,9 @@ import { IAppState, rootReducer, INITIAL_STATE } from './store';
 
 /** ERRORS */
 
+/** ROUTER */
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './routes';
 /** COMPONENTS */
 import { AppComponent } from './app.component';
 import { PlaceholderComponent } from './components/placeholder/placeholder.component';
@@ -22,7 +25,8 @@ import { AnotherPlaceholderComponent } from './components/another-placeholder/an
   ],
   imports: [
     BrowserModule,
-    NgReduxModule
+    NgReduxModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [
   ],

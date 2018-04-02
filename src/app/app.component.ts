@@ -6,6 +6,8 @@ import { select, NgRedux } from 'ng2-redux';
 import { IAppState } from './store';
 import { CHANGE_TITLE, INCREMENT } from './components/placeholder/actions';
 
+import "rxjs/add/operator/toPromise";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,6 +21,7 @@ export class AppComponent {
   constructor(private ngRedux: NgRedux<IAppState>) {
     
   }
+
   changeTitle(title: string) {
     this.ngRedux.dispatch( { type: CHANGE_TITLE, title });
   }
