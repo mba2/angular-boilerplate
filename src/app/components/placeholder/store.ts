@@ -11,7 +11,7 @@ export interface IPlaceholderState {
 }
 
 export const PLACEHOLDER_INIT_STATE: IPlaceholderState = {
-  counter: 0,
+  counter: 1000,
   title: 'Placeholder Title',
   items: ['Placeholder Item 1', 'Placeholder Item 2']
 }
